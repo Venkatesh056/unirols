@@ -1,0 +1,323 @@
+/* ====================================
+   UNIROLS - Product Page Styles
+   ==================================== */
+
+.specs-page {
+    margin-top: var(--header-height);
+    padding: 20px 0 60px;
+    background: var(--bg-light);
+    min-height: 80vh;
+}
+
+.specs-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.specs-header h1 {
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--mystic-navy);
+    margin-bottom: 20px;
+}
+
+.specs-header .highlight {
+    color: var(--red-inferno);
+}
+
+.specs-intro {
+    max-width: 800px;
+    margin: 0 auto;
+    color: var(--text-muted);
+    line-height: 1.7;
+    font-size: 16px;
+}
+
+/* Product Type Card */
+.product-type-card {
+    background: var(--bg-white);
+    border-radius: var(--radius-lg);
+    margin-bottom: 30px;
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+}
+
+.product-type-title {
+    background: var(--mystic-navy);
+    color: var(--mother-of-pearl);
+    padding: 15px 25px;
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.product-type-body {
+    padding: 25px;
+    position: relative;
+}
+
+.product-type-body.collapsed {
+    max-height: 450px;
+    overflow: hidden;
+    padding-bottom: 80px;
+}
+
+/* Product Intro Section */
+.product-intro {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+    align-items: start;
+}
+
+.product-type-image {
+    flex-shrink: 0;
+}
+
+.product-type-image .slider-container {
+    width: 280px;
+    height: 280px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.product-type-image .slide-image {
+    width: 280px;
+    height: 280px;
+    object-fit: cover;
+}
+
+.product-type-desc {
+    color: var(--text-muted);
+    line-height: 1.7;
+    font-size: 15px;
+    margin: 0;
+}
+
+/* Technical Data Table */
+.specs-table-container {
+    margin-bottom: 25px;
+}
+
+.specs-table-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--mystic-navy);
+    margin-bottom: 12px;
+}
+
+.specs-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    overflow: hidden;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-sm);
+}
+
+.specs-table th,
+.specs-table td {
+    padding: 10px 12px;
+    text-align: left;
+    border: 1px solid var(--border-light);
+}
+
+.specs-table th {
+    background: var(--mystic-navy);
+    color: var(--mother-of-pearl);
+    font-weight: 500;
+}
+
+.specs-table tbody tr:nth-child(even) {
+    background: rgba(154, 168, 184, 0.1);
+}
+
+.specs-table tbody tr:hover {
+    background: rgba(154, 168, 184, 0.2);
+}
+
+/* Two Column Section */
+.two-column-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 25px;
+}
+
+.advantages-section h4,
+.features-section h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--mystic-navy);
+    margin-bottom: 12px;
+}
+
+.advantages-section ul,
+.features-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.advantages-section li,
+.features-section li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 8px;
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.advantages-section li::before,
+.features-section li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--red-inferno);
+    font-weight: bold;
+}
+
+/* Product Gallery */
+.product-gallery-carousel {
+    margin-top: 25px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.product-gallery-track {
+    display: flex;
+    gap: 15px;
+}
+
+.product-gallery-slide {
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: transform var(--transition-medium);
+}
+
+.product-gallery-slide:hover {
+    transform: scale(1.02);
+}
+
+.product-gallery-img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow var(--transition-medium);
+}
+
+.product-gallery-img:hover {
+    box-shadow: var(--shadow-md);
+}
+
+/* Show More/Less */
+.show-more-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    background: linear-gradient(to top, var(--bg-white) 60%, transparent);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+
+.show-less-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.btn-show-more,
+.btn-show-less {
+    background: var(--red-inferno);
+    color: var(--mother-of-pearl);
+    padding: 10px 30px;
+    border: none;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-medium);
+    box-shadow: 0 4px 12px rgba(78, 0, 0, 0.3);
+}
+
+.btn-show-more:hover,
+.btn-show-less:hover {
+    background: var(--chocolate-cremoso);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(92, 64, 51, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .product-intro {
+        grid-template-columns: 1fr;
+    }
+
+    .product-type-image {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .specs-header h1 {
+        font-size: 22px;
+    }
+
+    .specs-intro {
+        font-size: 14px;
+    }
+
+    .two-column-section {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .product-type-image .slider-container,
+    .product-type-image .slide-image {
+        width: 240px;
+        height: 240px;
+    }
+
+    .specs-table {
+        font-size: 12px;
+    }
+
+    .specs-table th,
+    .specs-table td {
+        padding: 8px;
+    }
+
+    .product-gallery-img {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .specs-page {
+        padding: 15px 0 40px;
+    }
+
+    .product-type-title {
+        font-size: 16px;
+        padding: 12px 15px;
+    }
+
+    .product-type-body {
+        padding: 15px;
+    }
+
+    .product-type-image .slider-container,
+    .product-type-image .slide-image {
+        width: 200px;
+        height: 200px;
+    }
+}

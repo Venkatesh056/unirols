@@ -1,0 +1,122 @@
+/* ====================================
+   UNIROLS - Product Gallery Carousel
+   ==================================== */
+
+.product-gallery-carousel {
+    position: relative;
+    margin-top: 25px;
+    padding: 0 45px;
+    overflow: hidden;
+    outline: none;
+}
+
+.product-gallery-carousel:focus {
+    outline: 2px solid var(--dusty-blue);
+    outline-offset: 4px;
+    border-radius: var(--radius-md);
+}
+
+.product-gallery-track {
+    display: flex;
+    gap: 15px;
+    transition: transform 0.4s ease;
+    padding: 10px 0;
+}
+
+.product-gallery-slide {
+    flex-shrink: 0;
+    cursor: pointer;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.product-gallery-slide.active {
+    box-shadow: 0 4px 20px rgba(19, 39, 63, 0.25);
+}
+
+.product-gallery-img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    display: block;
+    border-radius: var(--radius-md);
+}
+
+/* Navigation Buttons */
+.product-gallery-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    background: var(--red-inferno);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-full);
+    font-size: 14px;
+    z-index: 10;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+    box-shadow: 0 2px 8px rgba(78, 0, 0, 0.3);
+}
+
+.product-gallery-nav:hover {
+    background: var(--chocolate-cremoso);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.product-gallery-prev {
+    left: 0;
+}
+
+.product-gallery-next {
+    right: 0;
+}
+
+/* Counter */
+.product-gallery-counter {
+    text-align: center;
+    margin-top: 12px;
+    padding: 4px 12px;
+    background: var(--mystic-navy);
+    color: var(--mother-of-pearl);
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 12px;
+    display: inline-block;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .product-gallery-carousel {
+        padding: 0 35px;
+    }
+
+    .product-gallery-img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .product-gallery-nav {
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .product-gallery-carousel {
+        padding: 0 30px;
+    }
+
+    .product-gallery-img {
+        width: 100px;
+        height: 100px;
+    }
+}

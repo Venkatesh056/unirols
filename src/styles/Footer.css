@@ -1,0 +1,19 @@
+/* Footer Styles */
+.footer {
+    background: var(--mystic-navy);
+    padding: 20px 0;
+    text-align: center;
+    border-top: 1px solid rgba(154, 168, 184, 0.2);
+    margin-top: auto;
+}
+
+.footer p {
+    color: var(--dusty-blue);
+    font-size: 14px;
+}
+
+@media (max-width: 480px) {
+    .footer p {
+        font-size: 12px;
+    }
+}
