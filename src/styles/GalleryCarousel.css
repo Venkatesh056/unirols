@@ -44,11 +44,11 @@
     display: block;
     cursor: pointer;
     transition: all var(--transition-medium);
-    box-shadow: var(--shadow-md);
+    box-shadow: none;
 }
 
 .gallery-carousel-slide.active .gallery-carousel-img {
-    box-shadow: var(--shadow-lg);
+    box-shadow: none;
 }
 
 .gallery-carousel-img:hover {
@@ -71,13 +71,13 @@
     justify-content: center;
     transition: all var(--transition-medium);
     z-index: 10;
-    box-shadow: 0 4px 15px rgba(78, 0, 0, 0.3);
+    box-shadow: none;
 }
 
 .gallery-nav:hover {
     background: var(--chocolate-cremoso);
     transform: translateY(-50%) scale(1.1);
-    box-shadow: 0 6px 20px rgba(92, 64, 51, 0.4);
+    box-shadow: none;
 }
 
 .gallery-prev {
@@ -100,7 +100,7 @@
     border-radius: 20px;
     font-size: 14px;
     font-weight: 500;
-    box-shadow: var(--shadow-sm);
+    box-shadow: none;
 }
 
 /* Responsive */
