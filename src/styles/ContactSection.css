@@ -1,28 +1,37 @@
 /* ====================================
-   UNIROLS - Contact Section Styles
+   UNIROLS - Contact Section Styles (LEVEL 4-5)
+   Container Queries + Fluid Layouts
    ==================================== */
 
 .contact {
-    padding: 50px 0;
-    background: var(--bg-white);
+    padding: clamp(40px, 6vw, 50px) 0;
+    background: var(--bg-light);
 }
 
 .contact-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 60px;
+    gap: clamp(40px, 6vw, 60px);
     max-width: 1200px;
     margin: 0 auto;
     align-items: start;
+    container-type: inline-size;
+}
+
+/* Container query: adapt to available space */
+@container (max-width: 700px) {
+    .contact-content {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* Contact Info */
 .contact-group {
-    margin-bottom: 22px;
+    margin-bottom: clamp(18px, 3vw, 22px);
 }
 
 .contact-group h4 {
-    font-size: 16px;
+    font-size: clamp(16px, 2.5vw, 18px);
     font-weight: 600;
     margin-bottom: 10px;
     color: var(--mystic-navy);
@@ -30,7 +39,7 @@
 
 .contact-group p {
     color: var(--text-muted);
-    font-size: 15px;
+    font-size: clamp(16px, 2.5vw, 18px);
     margin-bottom: 5px;
     display: flex;
     align-items: flex-start;
@@ -50,15 +59,18 @@
     transition: color var(--transition-fast);
 }
 
-.contact-group a:hover {
-    text-decoration: underline;
-    color: var(--red-inferno);
+/* Hover only on capable devices */
+@media (hover: hover) {
+    .contact-group a:hover {
+        text-decoration: underline;
+        color: var(--red-inferno);
+    }
 }
 
 /* Contact Form */
 .contact-form h4 {
-    font-size: 16px;
-    margin-bottom: 18px;
+    font-size: clamp(16px, 2.5vw, 18px);
+    margin-bottom: 20px;
     color: var(--mystic-navy);
     font-weight: 400;
 }
@@ -66,14 +78,14 @@
 .contact-form input,
 .contact-form textarea {
     width: 100%;
-    padding: 12px 15px;
+    padding: clamp(10px, 2vw, 12px) clamp(14px, 2.5vw, 16px);
     border: 1px solid var(--border-light);
     border-radius: var(--radius-sm);
-    margin-bottom: 15px;
+    margin-bottom: 14px;
     font-family: inherit;
-    font-size: 15px;
+    font-size: 16px;
     transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
-    background: #fff;
+    background: var(--white-pure);
 }
 
 .contact-form input:focus,
@@ -84,20 +96,22 @@
 }
 
 .checkbox-group {
-    margin-bottom: 15px;
+    margin-bottom: 14px;
 }
 
 .checkbox-group label {
     display: block;
     margin-bottom: 10px;
-    font-size: 15px;
+    font-size: clamp(14px, 2vw, 16px);
     color: var(--text-muted);
     cursor: pointer;
     transition: color var(--transition-fast);
 }
 
-.checkbox-group label:hover {
-    color: var(--mystic-navy);
+@media (hover: hover) {
+    .checkbox-group label:hover {
+        color: var(--mystic-navy);
+    }
 }
 
 .checkbox-group input[type="checkbox"] {
@@ -107,44 +121,16 @@
     accent-color: var(--red-inferno);
 }
 
-/* reCAPTCHA placeholder */
-.recaptcha-placeholder {
-    margin-bottom: 18px;
-}
-
-.recaptcha-box {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 12px;
-    border: 1px solid var(--border-light);
-    border-radius: var(--radius-sm);
-    background: #f9f9f9;
-    width: fit-content;
-    font-size: 14px;
-}
-
-.recaptcha-box input {
-    width: auto;
-    margin: 0;
-}
-
-.recaptcha-logo {
-    margin-left: 30px;
-    color: #999;
-    font-size: 11px;
-}
-
 /* Submit Button */
 .btn-submit {
     width: auto;
-    min-width: 180px;
-    padding: 12px 32px;
+    min-width: clamp(150px, 30vw, 200px);
+    padding: clamp(10px, 2vw, 14px) clamp(24px, 5vw, 36px);
     background: var(--red-inferno);
     color: var(--mother-of-pearl);
     border: none;
     border-radius: 50px;
-    font-size: 16px;
+    font-size: clamp(15px, 2.5vw, 18px);
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -153,13 +139,21 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    margin: 0 auto;
+    margin: 10px auto 0;
 }
 
-.btn-submit:hover:not(:disabled) {
-    background: var(--chocolate-cremoso);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(92, 64, 51, 0.4);
+@media (hover: hover) {
+    .btn-submit:hover:not(:disabled) {
+        background: var(--chocolate-cremoso);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(92, 64, 51, 0.4);
+    }
+}
+
+@media (hover: none) {
+    .btn-submit:active:not(:disabled) {
+        transform: scale(0.96);
+    }
 }
 
 .btn-submit:disabled {
@@ -181,13 +175,38 @@
 }
 
 .submit-message.success {
-    background: rgba(46, 125, 50, 0.1);
-    color: #2e7d32;
+    background: rgba(19, 39, 63, 0.1);
+    color: var(--navy-light);
 }
 
 .submit-message.error {
-    background: rgba(198, 40, 40, 0.1);
-    color: #c62828;
+    background: rgba(19, 39, 63, 0.15);
+    color: var(--navy-dark);
+}
+
+/* Map Section - Centered */
+.map-section {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.map-section h4 {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--mystic-navy);
+    margin-bottom: 20px;
+}
+
+.map-container-centered {
+    max-width: 800px;
+    margin: 0 auto;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(19, 39, 63, 0.15);
+}
+
+.map-container-centered iframe {
+    display: block;
 }
 
 /* Responsive */

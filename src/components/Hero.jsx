@@ -11,6 +11,13 @@ const Hero = ({
         threshold: 0.3,
     });
 
+    const scrollToProducts = () => {
+        const productsSection = document.getElementById('products');
+        if (productsSection) {
+            productsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    };
+
     return (
         <>
             <section className="hero">
@@ -26,7 +33,44 @@ const Hero = ({
                         className="hero-image"
                         loading="eager"
                     />
+                    <div className="hero-overlay" />
                 </motion.div>
+
+                {/* Hero Content Overlay */}
+                <div className="hero-content">
+                    <motion.div
+                        className="hero-text"
+                        initial={{ opacity: 0, y: 40 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.5 }}
+                    >
+                        <motion.span
+                            className="hero-badge"
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.5, delay: 0.8 }}
+                        >
+                            <i className="fas fa-industry" />
+                            Since 1992
+                        </motion.span>
+                        <h1 className="hero-headline">
+                            <span className="headline-main">Textile Machinery</span>
+                            <span className="headline-sub">Excellence</span>
+                        </h1>
+                        <p className="hero-description">
+                            Innovative solutions for spinning and weaving mills worldwide
+                        </p>
+                        <motion.button
+                            className="hero-cta"
+                            onClick={scrollToProducts}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                        >
+                            <span>Explore Our Products</span>
+                            <i className="fas fa-arrow-down" />
+                        </motion.button>
+                    </motion.div>
+                </div>
             </section>
 
             <section className="tagline" ref={taglineRef}>
@@ -45,3 +89,4 @@ const Hero = ({
 };
 
 export default Hero;
+

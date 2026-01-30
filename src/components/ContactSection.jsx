@@ -17,7 +17,6 @@ const ContactSection = () => {
             bobbinTransport: false,
             centralVacuum: false,
         },
-        captcha: false,
     });
 
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -26,14 +25,10 @@ const ContactSection = () => {
     const handleInputChange = (e) => {
         const { name, value, type, checked } = e.target;
         if (type === 'checkbox') {
-            if (name === 'captcha') {
-                setFormData(prev => ({ ...prev, captcha: checked }));
-            } else {
-                setFormData(prev => ({
-                    ...prev,
-                    products: { ...prev.products, [name]: checked }
-                }));
-            }
+            setFormData(prev => ({
+                ...prev,
+                products: { ...prev.products, [name]: checked }
+            }));
         } else {
             setFormData(prev => ({ ...prev, [name]: value }));
         }
@@ -58,7 +53,6 @@ const ContactSection = () => {
                     bobbinTransport: false,
                     centralVacuum: false,
                 },
-                captcha: false,
             });
         } catch {
             setSubmitStatus('error');
@@ -97,7 +91,7 @@ const ContactSection = () => {
                 <div className="contact-content">
                     {/* Contact Info */}
                     <motion.div
-                        className="contact-info"
+                        className="contact-info floating-card"
                         initial={{ opacity: 0, x: -30 }}
                         animate={isVisible ? { opacity: 1, x: 0 } : {}}
                         transition={{ duration: 0.6, delay: 0.2 }}
@@ -144,7 +138,7 @@ const ContactSection = () => {
 
                     {/* Contact Form */}
                     <motion.div
-                        className="contact-form"
+                        className="contact-form floating-card"
                         initial={{ opacity: 0, x: 30 }}
                         animate={isVisible ? { opacity: 1, x: 0 } : {}}
                         transition={{ duration: 0.6, delay: 0.3 }}
@@ -197,20 +191,6 @@ const ContactSection = () => {
                                 onChange={handleInputChange}
                             />
 
-                            <div className="recaptcha-placeholder">
-                                <div className="recaptcha-box">
-                                    <input
-                                        type="checkbox"
-                                        name="captcha"
-                                        checked={formData.captcha}
-                                        onChange={handleInputChange}
-                                    />
-                                    <span>I'm not a robot</span>
-                                    <div className="recaptcha-logo">
-                                        <small>reCAPTCHA</small>
-                                    </div>
-                                </div>
-                            </div>
 
                             <motion.button
                                 type="submit"
@@ -243,6 +223,28 @@ const ContactSection = () => {
                         </form>
                     </motion.div>
                 </div>
+
+                {/* Google Maps - Centered */}
+                <motion.div
+                    className="map-section"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isVisible ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.6, delay: 0.4 }}
+                >
+                    <h4>Find Us</h4>
+                    <div className="map-container-centered">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3916.8076899999997!2d77.0468!3d11.0168!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTHCsDAxJzAwLjUiTiA3N8KwMDInNDguNSJF!5e0!3m2!1sen!2sin!4v1705000000000!5m2!1sen!2sin"
+                            width="100%"
+                            height="300"
+                            style={{ border: 0 }}
+                            allowFullScreen=""
+                            loading="lazy"
+                            referrerPolicy="no-referrer-when-downgrade"
+                            title="UNIROLS Location"
+                        />
+                    </div>
+                </motion.div>
             </div>
         </section>
     );

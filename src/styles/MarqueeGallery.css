@@ -1,0 +1,183 @@
+/* ====================================
+   Premium Marquee Gallery
+   Continuous conveyor-belt style animation
+   ==================================== */
+
+.marquee-gallery {
+    margin-top: 30px;
+}
+
+.marquee-gallery-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--mystic-navy);
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.marquee-gallery-title i {
+    color: var(--accent-primary);
+}
+
+/* Container with overflow hidden */
+.marquee-container {
+    overflow: hidden;
+    position: relative;
+    border-radius: 12px;
+    cursor: grab;
+}
+
+/* Fade edges for premium feel */
+.marquee-container::before,
+.marquee-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 80px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.marquee-container::before {
+    left: 0;
+    background: linear-gradient(to right, var(--bg-white) 0%, transparent 100%);
+}
+
+.marquee-container::after {
+    right: 0;
+    background: linear-gradient(to left, var(--bg-white) 0%, transparent 100%);
+}
+
+/* Track with continuous animation */
+.marquee-track {
+    display: flex;
+    gap: 20px;
+    width: max-content;
+    animation: marquee-scroll var(--animation-duration, 20s) linear infinite;
+    will-change: transform;
+}
+
+/* Pause animation on hover */
+.marquee-track.paused {
+    animation-play-state: paused;
+}
+
+/* Keyframes for seamless right-to-left movement */
+@keyframes marquee-scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Individual slide */
+.marquee-slide {
+    flex-shrink: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.marquee-slide:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(19, 39, 63, 0.25);
+    z-index: 5;
+}
+
+.marquee-slide img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    border-radius: 12px;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+/* Zoom Overlay */
+.zoom-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(19, 39, 63, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    cursor: zoom-out;
+    backdrop-filter: blur(8px);
+}
+
+.zoom-image {
+    max-width: 90vw;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 30px 100px rgba(0, 0, 0, 0.5);
+}
+
+.zoom-close {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.zoom-close:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .marquee-slide img {
+        width: 160px;
+        height: 160px;
+    }
+
+    .marquee-container::before,
+    .marquee-container::after {
+        width: 40px;
+    }
+
+    .zoom-close {
+        top: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .marquee-slide img {
+        width: 140px;
+        height: 140px;
+    }
+
+    .marquee-track {
+        gap: 12px;
+    }
+
+    .marquee-container::before,
+    .marquee-container::after {
+        width: 25px;
+    }
+}

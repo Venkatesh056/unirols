@@ -1,0 +1,389 @@
+/* ====================================
+   UNIROLS - Product Tile (Home Products Grid)
+   Floating Card Design with Dynamic Effects
+   ==================================== */
+
+.product-tiles {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.product-tile {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    background: var(--white-pure);
+    box-shadow: 0 8px 32px rgba(19, 39, 63, 0.12), 0 2px 8px rgba(19, 39, 63, 0.08);
+    border: none;
+    transition: all 0.3s ease-in-out;
+    min-width: 0;
+}
+
+.product-tile:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 24px 60px rgba(19, 39, 63, 0.25), 0 12px 24px rgba(19, 39, 63, 0.18);
+}
+
+.product-tile:hover .product-tile-image {
+    transform: scale(1.05);
+}
+
+.product-tile:hover .product-tile-cta {
+    background: linear-gradient(135deg, #1a4d7a 0%, var(--navy-dark) 100%);
+    box-shadow: 0 8px 25px rgba(19, 39, 63, 0.4);
+}
+
+/* Category Badge */
+.product-tile-badge {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    z-index: 20;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.product-tile-badge i {
+    font-size: 11px;
+}
+
+.badge-spinning {
+    background: linear-gradient(135deg, rgba(30, 58, 95, 0.95) 0%, rgba(19, 39, 63, 0.95) 100%);
+    color: var(--white-pure);
+}
+
+.badge-weaving {
+    background: linear-gradient(135deg, rgba(42, 74, 122, 0.95) 0%, rgba(30, 58, 95, 0.95) 100%);
+    color: var(--white-pure);
+}
+
+.badge-general {
+    background: linear-gradient(135deg, rgba(61, 92, 138, 0.95) 0%, rgba(42, 74, 122, 0.95) 100%);
+    color: var(--white-pure);
+}
+
+.product-tile-link {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    text-decoration: none;
+}
+
+.product-tile-media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: var(--white-soft);
+    overflow: hidden;
+}
+
+.product-tile-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.95);
+    border: none;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 24px;
+    color: var(--navy-dark);
+    transition: all 0.3s ease;
+    z-index: 10;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+}
+
+.product-tile:hover .product-tile-nav {
+    opacity: 1;
+}
+
+.product-tile-nav:hover {
+    background: var(--navy-dark);
+    color: var(--white-pure);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.product-tile-nav-prev {
+    left: 12px;
+}
+
+.product-tile-nav-next {
+    right: 12px;
+}
+
+/* Progress Dots */
+.product-tile-dots {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    z-index: 10;
+}
+
+.product-tile-dots .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
+}
+
+.product-tile-dots .dot.active {
+    background: var(--white-pure);
+    transform: scale(1.2);
+}
+
+/* Image Overlay Text */
+.product-tile-overlay-text {
+    position: absolute;
+    bottom: 45px;
+    left: 12px;
+    background: rgba(19, 39, 63, 0.9);
+    color: var(--white-pure);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    backdrop-filter: blur(4px);
+    z-index: 10;
+}
+
+.product-tile-overlay-text i {
+    color: #4ade80;
+    font-size: 10px;
+}
+
+/* Recommended Badge */
+.product-tile-recommended-badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    color: var(--white-pure);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    z-index: 25;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+}
+
+/* Recommended Card Highlight */
+.product-tile-recommended {
+    box-shadow: 0 8px 32px rgba(19, 39, 63, 0.15), 0 2px 8px rgba(19, 39, 63, 0.1), 0 0 0 2px rgba(245, 158, 11, 0.3);
+}
+
+.product-tile-recommended:hover {
+    box-shadow: 0 24px 60px rgba(19, 39, 63, 0.28), 0 12px 24px rgba(19, 39, 63, 0.2), 0 0 0 2px rgba(245, 158, 11, 0.5);
+}
+
+.product-tile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease-out;
+}
+
+.product-tile-placeholder {
+    background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
+}
+
+.product-tile-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,
+            transparent 40%,
+            rgba(19, 39, 63, 0.5));
+    opacity: 0;
+    transition: opacity var(--transition-medium);
+}
+
+.product-tile:hover .product-tile-image {
+    transform: scale(1.08);
+}
+
+.product-tile:hover .product-tile-overlay {
+    opacity: 1;
+}
+
+.product-tile-footer {
+    padding: 24px;
+    background: var(--white-pure);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-tile-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--navy-dark);
+    line-height: 1.35;
+    margin-bottom: 12px;
+}
+
+.product-tile-desc {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Feature Pills */
+.product-tile-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.feature-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 10px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--navy-medium);
+    background: var(--white-soft);
+    border-radius: 20px;
+    border: 1px solid var(--white-muted);
+}
+
+.feature-pill i {
+    font-size: 9px;
+    color: #22c55e;
+}
+
+/* Enhanced CTA Button */
+.product-tile-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: var(--white-pure);
+    font-weight: 600;
+    font-size: 14px;
+    padding: 14px 24px;
+    background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-medium) 100%);
+    border-radius: 10px;
+    transition: all var(--transition-fast);
+    box-shadow: 0 4px 15px rgba(19, 39, 63, 0.25);
+    position: relative;
+    overflow: hidden;
+}
+
+.product-tile-cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.product-tile:hover .product-tile-cta::before {
+    left: 100%;
+}
+
+.product-tile-cta i {
+    font-size: 12px;
+    transition: transform var(--transition-fast);
+}
+
+.product-tile:hover .product-tile-cta {
+    background: linear-gradient(135deg, #0d1a2a 0%, var(--navy-dark) 100%);
+    box-shadow: 0 6px 20px rgba(19, 39, 63, 0.35);
+}
+
+.product-tile:hover .product-tile-cta i {
+    transform: translateX(4px);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .product-tiles {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .product-tiles {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+    }
+
+    .product-tile {
+        border-radius: 16px;
+    }
+
+    .product-tile-badge {
+        padding: 6px 10px;
+        font-size: 10px;
+        top: 10px;
+        left: 10px;
+    }
+
+    .product-tile-badge span {
+        display: none;
+    }
+
+    .product-tile-footer {
+        padding: 16px;
+    }
+
+    .product-tile-title {
+        font-size: 14px;
+    }
+
+    .product-tile-desc {
+        font-size: 12px;
+        -webkit-line-clamp: 2;
+    }
+
+    .product-tile-features {
+        display: none;
+    }
+
+    .product-tile-cta {
+        font-size: 12px;
+        padding: 10px 16px;
+    }
+}

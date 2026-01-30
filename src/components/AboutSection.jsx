@@ -21,7 +21,7 @@ const AboutSection = () => {
 
                 <div className="about-content">
                     <motion.div
-                        className="about-text"
+                        className="about-text floating-card"
                         initial={{ opacity: 0, x: -30 }}
                         animate={isVisible ? { opacity: 1, x: 0 } : {}}
                         transition={{ duration: 0.6, delay: 0.2 }}
@@ -40,15 +40,6 @@ const AboutSection = () => {
                             Unirols Airtex has become a trusted partner for textile manufacturers around the world for over
                             30 years.
                         </p>
-                    </motion.div>
-
-                    <motion.div
-                        className="about-image"
-                        initial={{ opacity: 0, x: 30 }}
-                        animate={isVisible ? { opacity: 1, x: 0 } : {}}
-                        transition={{ duration: 0.6, delay: 0.3 }}
-                    >
-                        <img src="/abt us.jpg" alt="About Unirols Airtex" className="about-img" />
                     </motion.div>
                 </div>
             </div>

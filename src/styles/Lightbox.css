@@ -66,8 +66,8 @@
 
 .lightbox-prev:hover,
 .lightbox-next:hover {
-    background: var(--red-inferno);
-    color: #fff;
+    background: var(--navy-dark);
+    color: var(--white-pure);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
 
@@ -84,10 +84,10 @@
     bottom: 30px;
     left: 50%;
     transform: translateX(-50%);
-    color: var(--mother-of-pearl);
+    color: var(--white-off);
     font-size: 16px;
     z-index: 10001;
-    background: rgba(78, 0, 0, 0.8);
+    background: rgba(19, 39, 63, 0.9);
     padding: 8px 16px;
     border-radius: 20px;
 }

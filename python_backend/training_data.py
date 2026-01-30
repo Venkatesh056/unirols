@@ -8,8 +8,9 @@ TRAINING_DATA = {
         {
             "tag": "greeting",
             "patterns": [
-                "Hi", "Hello", "Hey", "Good morning", "Good afternoon",
-                "Greetings", "What's up", "How are you", "Hi there"
+                "Hi", "Hello", "Hey", "Good morning", "Good afternoon", "Good evening",
+                "Greetings", "What's up", "How are you", "Hi there", "Hello there",
+                "Howdy", "Hiya", "Yo", "Sup", "Hii", "Helloo", "Heyyy"
             ],
             "responses": [
                 "Hello! Welcome to Unirols Airtex. How can I help you with our textile machinery today?",
@@ -27,7 +28,16 @@ TRAINING_DATA = {
                 "Tell me about your equipment",
                 "What solutions do you provide",
                 "Product catalog",
-                "List of products"
+                "List of products",
+                "Your products",
+                "Products",
+                "What do you make",
+                "What do you manufacture",
+                "Show products",
+                "Product list",
+                "Available products",
+                "What can you offer",
+                "What are your products"
             ],
             "responses": [
                 "We offer three main product lines:\n\n1. Overhead Travelling Cleaner (for Spinning & Weaving units)\n2. Bobbin Transport System\n3. Central Vacuum System\n\nAll systems are custom-built to suit your specific requirements. Which one would you like to know more about?"
@@ -103,7 +113,22 @@ TRAINING_DATA = {
                 "Price",
                 "Quotation",
                 "How much",
-                "Cost"
+                "Cost",
+                "Sales contact",
+                "Sales phone",
+                "Sales??",
+                "Sales team",
+                "Reach sales",
+                "Sales details",
+                "Purchase",
+                "Order",
+                "Buy",
+                "Pricing",
+                "Quote request",
+                "Sales inquiry",
+                "Product pricing",
+                "How to buy",
+                "Want to purchase"
             ],
             "responses": [
                 "For product inquiries, quotations, and new orders, please contact our sales team:\n\n📞 Phone: +91 93629 06631\n📧 Email: sales@unirolsairtex.com\n\nOur sales team will discuss your specific requirements and provide a customized quote."
@@ -117,10 +142,42 @@ TRAINING_DATA = {
                 "Spares contact",
                 "Maintenance parts",
                 "Need spare",
-                "Parts email"
+                "Parts email",
+                "Spares",
+                "Spares number",
+                "Spares phone",
+                "Spares??",
+                "Spare parts contact",
+                "Parts department",
+                "Replacement",
+                "Maintenance",
+                "Service parts",
+                "Spares team",
+                "Parts inquiry"
             ],
             "responses": [
                 "For spare parts and replacements, please contact our spares department:\n\n📞 Phone: +91 96002 25031\n📧 Email: spares@unirolsairtex.com\n\nThey'll help you with all maintenance items and replacement parts."
+            ]
+        },
+        {
+            "tag": "contact_admin",
+            "patterns": [
+                "Admin contact",
+                "Admin number",
+                "Admin phone",
+                "Admin email",
+                "Contact admin",
+                "Admin",
+                "Admin??",
+                "Administration contact",
+                "General inquiries",
+                "Admin details",
+                "How to contact admin",
+                "Admin phone number",
+                "Admin email address"
+            ],
+            "responses": [
+                "📞 **Admin Contact:**\n\nPhone: +91 98947 02231\nEmail: admin@unirolsairtex.com\n\nFor general inquiries and administrative matters."
             ]
         },
         {
@@ -131,7 +188,13 @@ TRAINING_DATA = {
                 "Phone number",
                 "Email address",
                 "Get in touch",
-                "Contact details"
+                "Contact details",
+                "All contacts",
+                "Contact information",
+                "How can I contact you",
+                "Contact numbers",
+                "Email addresses",
+                "Phone numbers"
             ],
             "responses": [
                 "You can reach us through:\n\n**Sales** (Products & Quotes):\n📞 +91 93629 06631\n📧 sales@unirolsairtex.com\n\n**Spares** (Parts & Maintenance):\n📞 +91 96002 25031\n📧 spares@unirolsairtex.com\n\n**Admin** (General Inquiries):\n📞 +91 98947 02231\n📧 admin@unirolsairtex.com"
@@ -145,7 +208,19 @@ TRAINING_DATA = {
                 "Location",
                 "Office address",
                 "Factory location",
-                "Coimbatore"
+                "Coimbatore",
+                "Where is your office",
+                "Where is your factory",
+                "Address",
+                "Find you",
+                "Where are you",
+                "Your location",
+                "Office location",
+                "Company address",
+                "Where can I find you",
+                "Directions",
+                "Map",
+                "How to reach"
             ],
             "responses": [
                 "📍 **Our Location:**\n\n2/20, Meenan Thottam\nKurumpalayam Link Road\nA.G Pudur, Irugur\nCoimbatore - 641103\nTamil Nadu, India\n\nWe're located in Coimbatore, Tamil Nadu. Feel free to visit or contact us for directions!"

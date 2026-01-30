@@ -11,6 +11,13 @@ export default defineConfig({
     fs: {
       // Allow serving files from parent directory
       allow: ['..']
+    },
+    // Proxy API during development to Flask backend
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5000',
+        changeOrigin: true
+      }
     }
   },
   // Configure build output

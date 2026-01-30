@@ -1,0 +1,150 @@
+/* ====================================
+   UNIROLS - Products Carousel Styles
+   For Mobile & Tablet
+   ==================================== */
+
+.products-carousel {
+    position: relative;
+    max-width: 100%;
+    padding: 0 50px;
+}
+
+.products-carousel-track {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.carousel-item {
+    flex: 0 0 calc(50% - 10px);
+    max-width: calc(50% - 10px);
+    transition: all 0.4s ease;
+}
+
+.carousel-item.hidden {
+    position: absolute;
+    pointer-events: none;
+}
+
+.carousel-item.visible {
+    position: relative;
+    pointer-events: auto;
+}
+
+/* Carousel Navigation Buttons */
+.carousel-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 45px;
+    height: 45px;
+    background: var(--navy-dark);
+    color: var(--white-pure);
+    border: none;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: none;
+    transition: all 0.3s ease;
+}
+
+.carousel-nav:hover {
+    background: var(--navy-light);
+    transform: translateY(-50%);
+}
+
+.carousel-prev {
+    left: 0;
+}
+
+.carousel-next {
+    right: 0;
+}
+
+/* Carousel Dots */
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+.carousel-dot {
+    width: 40px;
+    height: 5px;
+    border-radius: 3px;
+    background: var(--border-light);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.carousel-dot:hover {
+    background: var(--dusty-blue);
+}
+
+.carousel-dot.active {
+    background: var(--navy-dark);
+    transform: scaleY(1.2);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .products-carousel {
+        padding: 0 40px;
+    }
+
+    .carousel-nav {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+
+    .carousel-item {
+        flex: 0 0 calc(50% - 8px);
+        max-width: calc(50% - 8px);
+    }
+
+    /* Keep dots same size on mobile */
+    .carousel-dot {
+        width: 40px;
+        height: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .products-carousel {
+        padding: 0 35px;
+    }
+
+    .carousel-nav {
+        width: 35px;
+        height: 35px;
+        font-size: 14px;
+    }
+
+    .products-carousel-track {
+        gap: 12px;
+    }
+
+    .carousel-item {
+        flex: 0 0 calc(50% - 6px);
+        max-width: calc(50% - 6px);
+    }
+
+    .carousel-dots {
+        gap: 8px;
+        margin-top: 20px;
+    }
+
+    /* Keep dots same size on small mobile */
+    .carousel-dot {
+        width: 40px;
+        height: 5px;
+    }
+}

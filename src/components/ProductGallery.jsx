@@ -1,11 +1,9 @@
-import { useState, useCallback, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import '../styles/ProductGallery.css';
 
 const ProductGallery = ({ images = [], onImageClick }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
-    const containerRef = useRef(null);
-    const touchStartX = useRef(0);
 
     const totalSlides = images.length;
 
@@ -17,48 +15,23 @@ const ProductGallery = ({ images = [], onImageClick }) => {
         setCurrentIndex(prev => prev === totalSlides - 1 ? 0 : prev + 1);
     }, [totalSlides]);
 
-    // Keyboard navigation
-    const handleKeyDown = useCallback((e) => {
-        if (e.key === 'ArrowLeft') {
-            e.preventDefault();
-            goToPrevious();
-        } else if (e.key === 'ArrowRight') {
-            e.preventDefault();
-            goToNext();
-        }
-    }, [goToPrevious, goToNext]);
-
-    // Touch handlers
-    const handleTouchStart = (e) => {
-        touchStartX.current = e.touches[0].clientX;
-    };
-
-    const handleTouchEnd = (e) => {
-        const diff = touchStartX.current - e.changedTouches[0].clientX;
-        if (Math.abs(diff) > 50) {
-            diff > 0 ? goToNext() : goToPrevious();
-        }
-    };
-
     if (totalSlides === 0) return null;
 
-    // Calculate visible range (show 4 images centered on current)
-    const slideWidth = 165; // 150px + 15px gap
-    const getTransform = () => {
-        const containerWidth = containerRef.current?.offsetWidth || 600;
-        return -currentIndex * slideWidth + (containerWidth / 2) - 75;
+    // Get the indices for the stacked cards
+    const getStackedIndices = () => {
+        const indices = [];
+        // Show current and 2 cards behind
+        for (let i = 0; i < Math.min(3, totalSlides); i++) {
+            const index = (currentIndex + i) % totalSlides;
+            indices.push(index);
+        }
+        return indices;
     };
 
+    const stackedIndices = getStackedIndices();
+
     return (
-        <div
-            className="product-gallery-carousel"
-            onKeyDown={handleKeyDown}
-            onTouchStart={handleTouchStart}
-            onTouchEnd={handleTouchEnd}
-            tabIndex={0}
-            role="region"
-            aria-label="Product gallery"
-        >
+        <div className="product-gallery-carousel" role="region" aria-label="Product gallery">
             <button
                 className="product-gallery-nav product-gallery-prev"
                 onClick={goToPrevious}
@@ -67,36 +40,45 @@ const ProductGallery = ({ images = [], onImageClick }) => {
                 <i className="fas fa-chevron-left" />
             </button>
 
-            <div
-                className="product-gallery-track"
-                ref={containerRef}
-                style={{ transform: `translateX(${getTransform()}px)` }}
-            >
-                {images.map((img, idx) => (
-                    <motion.div
-                        key={idx}
-                        className={`product-gallery-slide ${idx === currentIndex ? 'active' : ''}`}
-                        animate={{
-                            scale: idx === currentIndex ? 1 : 0.85,
-                            opacity: idx === currentIndex ? 1 : 0.5
-                        }}
-                        transition={{ duration: 0.3 }}
-                        onClick={() => {
-                            if (idx === currentIndex && onImageClick) {
-                                onImageClick(idx, images);
-                            } else {
-                                setCurrentIndex(idx);
-                            }
-                        }}
-                    >
-                        <img
-                            src={img}
-                            alt={`Gallery ${idx + 1}`}
-                            className="product-gallery-img"
-                            loading="lazy"
-                        />
-                    </motion.div>
-                ))}
+            <div className="product-gallery-stack-container">
+                <AnimatePresence mode="popLayout">
+                    {stackedIndices.map((imgIndex, stackPosition) => {
+                        const isActive = stackPosition === 0;
+                        const zIndex = 10 - stackPosition;
+                        
+                        // Calculate transforms for stacked effect
+                        const scale = 1 - (stackPosition * 0.08);
+                        const yOffset = stackPosition * 15;
+                        const rotation = stackPosition === 1 ? -4 : stackPosition === 2 ? 4 : 0;
+                        const opacity = stackPosition === 0 ? 1 : 0.6 - (stackPosition * 0.15);
+
+                        return (
+                            <motion.div
+                                key={`${imgIndex}-${stackPosition}`}
+                                className={`product-gallery-card ${isActive ? 'active' : ''}`}
+                                style={{ zIndex }}
+                                initial={{ scale: 0.8, opacity: 0, rotateZ: 0 }}
+                                animate={{
+                                    scale,
+                                    y: yOffset,
+                                    rotateZ: rotation,
+                                    opacity
+                                }}
+                                exit={{ scale: 0.7, opacity: 0, rotateZ: -10 }}
+                                transition={{ duration: 0.4, ease: [0.34, 1.56, 0.64, 1] }}
+                                onClick={() => isActive && onImageClick && onImageClick(imgIndex, images)}
+                                onDoubleClick={() => isActive && onImageClick && onImageClick(imgIndex, images)}
+                            >
+                                <img
+                                    src={images[imgIndex]}
+                                    alt={`Gallery ${imgIndex + 1}`}
+                                    className="product-gallery-img"
+                                    loading="lazy"
+                                />
+                            </motion.div>
+                        );
+                    })}
+                </AnimatePresence>
             </div>
 
             <button

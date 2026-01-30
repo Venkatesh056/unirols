@@ -1,0 +1,292 @@
+/* ====================================
+   UNIROLS - Enhanced Stacked Carousel (LEVEL 5)
+   Input-Aware + Adaptive Functionality
+   ==================================== */
+
+.enhanced-carousel {
+    position: relative;
+    width: 100%;
+    outline: none;
+    user-select: none;
+    padding: clamp(15px, 3vw, 20px) 0;
+    container-type: inline-size;
+}
+
+/* Main container with buttons and cards */
+.carousel-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(10px, 3vw, 20px);
+    width: 100%;
+}
+
+/* Navigation Buttons - Input Aware */
+.carousel-nav-btn {
+    background: transparent;
+    color: var(--mystic-navy);
+    width: clamp(35px, 8vw, 50px);
+    height: clamp(35px, 8vw, 50px);
+    border-radius: 0;
+    font-size: clamp(18px, 4vw, 28px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 20;
+    border: none;
+    cursor: pointer;
+    flex-shrink: 0;
+    opacity: 0.7;
+}
+
+/* Mouse: hover effects */
+@media (hover: hover) and (pointer: fine) {
+    .carousel-nav-btn:hover {
+        opacity: 1;
+        color: var(--navy-light);
+        transform: scale(1.1);
+    }
+}
+
+/* Touch: larger tap targets */
+@media (hover: none) and (pointer: coarse) {
+    .carousel-nav-btn {
+        min-width: 44px;
+        min-height: 44px;
+        opacity: 0.9;
+    }
+    
+    .carousel-nav-btn:active {
+        transform: scale(0.95);
+        opacity: 1;
+    }
+}
+
+/* Keyboard: focus visible */
+.carousel-nav-btn:focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+}
+
+.carousel-nav-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+/* Cards Container - Fluid sizing */
+.carousel-cards-container {
+    position: relative;
+    width: clamp(200px, 40vw, 280px);
+    height: clamp(200px, 40vw, 280px);
+    overflow: visible;
+}
+
+/* Container query: adapt to available space */
+@container (max-width: 500px) {
+    .carousel-cards-container {
+        width: 180px;
+        height: 180px;
+    }
+    
+    .carousel-nav-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 16px;
+    }
+}
+
+.carousel-cards-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* Individual Card */
+.carousel-card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    background: var(--dusty-blue);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: default;
+}
+
+.carousel-card.active {
+    cursor: pointer;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+}
+
+/* Mouse: hover on active card */
+@media (hover: hover) {
+    .carousel-card.active:hover {
+        transform: scale(1.02);
+    }
+}
+
+/* Touch: tap feedback */
+@media (hover: none) {
+    .carousel-card.active:active {
+        transform: scale(0.98);
+    }
+}
+
+.carousel-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    aspect-ratio: 1 / 1;
+}
+
+/* Counter */
+.carousel-counter {
+    text-align: center;
+    margin-top: clamp(15px, 3vw, 20px);
+    background: rgba(19, 39, 63, 0.85);
+    color: var(--white-off);
+    padding: clamp(5px, 1.5vw, 8px) clamp(12px, 3vw, 20px);
+    border-radius: 20px;
+    font-size: clamp(11px, 2vw, 14px);
+    font-weight: 600;
+    display: inline-block;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Dots - Touch optimized */
+.carousel-dots {
+    display: flex;
+    gap: clamp(8px, 2vw, 10px);
+    margin-top: clamp(12px, 2.5vw, 15px);
+    justify-content: center;
+}
+
+.carousel-dot {
+    width: 40px;
+    height: 5px;
+    background: var(--border-light);
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+    border: none;
+    min-height: 44px; /* Touch target */
+    display: flex;
+    align-items: center;
+}
+
+.carousel-dot::before {
+    content: '';
+    width: 40px;
+    height: 5px;
+    background: currentColor;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+/* Mouse: hover effects */
+@media (hover: hover) {
+    .carousel-dot:hover::before {
+        transform: scaleY(1.4);
+        background: var(--dusty-blue);
+    }
+}
+
+/* Touch: larger tap area */
+@media (hover: none) {
+    .carousel-dot {
+        padding: 8px;
+    }
+    
+    .carousel-dot:active::before {
+        transform: scaleY(1.6);
+    }
+}
+
+.carousel-dot.active::before {
+    background: var(--navy-dark);
+    transform: scaleY(1.4);
+}
+
+.carousel-dot:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Keyboard navigation support */
+.carousel-dot:focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .carousel-card,
+    .carousel-nav-btn,
+    .carousel-dot,
+    .carousel-dot::before {
+        transition: none;
+    }
+}
+
+/* Legacy responsive support */
+@media (max-width: 768px) {
+    .carousel-cards-container {
+        width: 240px;
+        height: 240px;
+    }
+
+    .carousel-nav-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 22px;
+    }
+
+    .carousel-main {
+        gap: 15px;
+    }
+
+    .carousel-counter {
+        font-size: 12px;
+        padding: 6px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .enhanced-carousel {
+        padding: 15px 0;
+    }
+
+    .carousel-cards-container {
+        width: 200px;
+        height: 200px;
+    }
+
+    .carousel-nav-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+    }
+
+    .carousel-main {
+        gap: 10px;
+    }
+
+    .carousel-counter {
+        font-size: 11px;
+        padding: 5px 12px;
+        margin-top: 15px;
+    }
+
+    .carousel-dots {
+        gap: 8px;
+        margin-top: 12px;
+    }
+}

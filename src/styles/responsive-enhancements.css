@@ -1,0 +1,818 @@
+/* ====================================
+   UNIROLS - LEVEL 4-5 RESPONSIVE SYSTEM
+   Container Queries + Fluid Layouts + Adaptive Motion
+   ==================================== */
+
+/* ====================================
+   CONTAINER QUERIES (LEVEL 4 UPGRADE)
+   ==================================== */
+
+/* Enable container queries for key components */
+.products-grid,
+.contact-content,
+.product-intro,
+.related-products-grid {
+    container-type: inline-size;
+}
+
+/* Product cards adapt to container space, not viewport */
+@container (max-width: 600px) {
+    .product-item {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+@container (min-width: 601px) and (max-width: 900px) {
+    .product-item {
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+    }
+}
+
+/* Contact form adapts to available space */
+@container (max-width: 700px) {
+    .contact-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ====================================
+   UNIROLS - COMPREHENSIVE RESPONSIVE ENHANCEMENTS
+   Mobile, Tablet, Desktop & iOS Optimized
+   ==================================== */
+
+/* ====================================
+   iOS SPECIFIC FIXES
+   ==================================== */
+
+/* Prevent iOS zoom on input focus */
+@supports (-webkit-touch-callout: none) {
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    textarea,
+    select {
+        font-size: 16px !important;
+    }
+}
+
+/* iOS Safari bottom bar fix */
+@supports (-webkit-touch-callout: none) {
+    .chatbot-container {
+        bottom: calc(100px + env(safe-area-inset-bottom));
+    }
+    
+    .chatbot-button {
+        bottom: calc(95px + env(safe-area-inset-bottom));
+    }
+}
+
+/* Safe area insets for notched devices */
+body {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+}
+
+/* ====================================
+   TOUCH OPTIMIZATION
+   ==================================== */
+
+/* Larger touch targets for mobile */
+@media (max-width: 768px) {
+    button,
+    a,
+    .nav-link,
+    .dropdown-item {
+        min-height: 44px;
+        min-width: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* Prevent text selection on touch */
+    .product-card,
+    .nav-link,
+    button {
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+}
+
+/* ====================================
+   IMPROVED MOBILE NAVIGATION
+   ==================================== */
+
+@media (max-width: 768px) {
+    /* Smooth mobile menu */
+    .nav {
+        max-height: calc(100vh - var(--header-height));
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Better dropdown spacing */
+    .dropdown-menu {
+        margin-top: 8px;
+    }
+    
+    .dropdown-item {
+        padding: 12px 20px;
+        font-size: 15px;
+    }
+}
+
+/* ====================================
+   RESPONSIVE IMAGES (LEVEL 5 UPGRADE)
+   ==================================== */
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Modern image optimization */
+.hero-image,
+.product-image,
+.gallery-image {
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    object-position: center;
+}
+
+.product-card-image {
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+}
+
+.profile-image,
+.avatar {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+/* Prevent image dragging on touch devices */
+@media (max-width: 768px) {
+    img {
+        -webkit-user-drag: none;
+        -webkit-touch-callout: none;
+        pointer-events: none;
+    }
+    
+    /* Re-enable for clickable images */
+    .product-gallery-img,
+    .carousel-card-image,
+    .slider-image {
+        pointer-events: auto;
+    }
+}
+
+/* ====================================
+   RESPONSIVE TYPOGRAPHY
+   ==================================== */
+
+/* Base font scaling */
+html {
+    font-size: 16px;
+}
+
+@media (max-width: 1200px) {
+    html {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    html {
+        font-size: 14px;
+    }
+    
+    body {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+}
+
+@media (max-width: 480px) {
+    html {
+        font-size: 14px;
+    }
+}
+
+/* Responsive headings */
+h1 {
+    font-size: clamp(24px, 5vw, 36px);
+}
+
+h2 {
+    font-size: clamp(20px, 4vw, 28px);
+}
+
+h3 {
+    font-size: clamp(18px, 3.5vw, 24px);
+}
+
+h4 {
+    font-size: clamp(16px, 3vw, 20px);
+}
+
+/* ====================================
+   FLUID CONTAINERS (LEVEL 4 UPGRADE)
+   ==================================== */
+
+.container {
+    width: 100%;
+    max-width: min(90vw, var(--container-max));
+    margin: 0 auto;
+    padding: 0 clamp(12px, 3vw, 20px);
+}
+
+/* Adaptive max-widths for different contexts */
+.hero .container {
+    max-width: min(95vw, 1800px);
+}
+
+.contact .container,
+.products .container {
+    max-width: min(92vw, 1400px);
+}
+
+/* ====================================
+   FLUID SPACING (LEVEL 4 UPGRADE)
+   ==================================== */
+
+/* Fluid spacing that scales smoothly between breakpoints */
+:root {
+    --spacing-xs: clamp(4px, 0.5vw, 8px);
+    --spacing-sm: clamp(8px, 1.5vw, 16px);
+    --spacing-md: clamp(16px, 2.5vw, 24px);
+    --spacing-lg: clamp(24px, 4vw, 40px);
+    --spacing-xl: clamp(36px, 6vw, 60px);
+}
+
+/* Override for mobile if needed */
+@media (max-width: 480px) {
+    :root {
+        --spacing-xs: 4px;
+        --spacing-sm: 8px;
+        --spacing-md: 16px;
+        --spacing-lg: 24px;
+        --spacing-xl: 36px;
+    }
+}
+
+/* ====================================
+   FLUID SECTIONS (LEVEL 4 UPGRADE)
+   ==================================== */
+
+section {
+    padding: clamp(30px, 8vw, 60px) 0;
+}
+
+/* ====================================
+   RESPONSIVE GRIDS
+   ==================================== */
+
+/* Auto-responsive grid */
+.responsive-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+@media (max-width: 768px) {
+    .responsive-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+/* ====================================
+   RESPONSIVE BUTTONS (FLUID SIZING)
+   ==================================== */
+
+@media (max-width: 768px) {
+    .btn,
+    button {
+        padding: clamp(10px, 2.5vw, 12px) clamp(20px, 5vw, 24px);
+        font-size: clamp(13px, 3vw, 14px);
+    }
+}
+
+@media (max-width: 480px) {
+    /* Full width buttons on small screens */
+    .btn-submit,
+    .product-card-btn {
+        width: 100%;
+    }
+}
+
+/* ====================================
+   RESPONSIVE FORMS
+   ==================================== */
+
+@media (max-width: 768px) {
+    input,
+    textarea,
+    select {
+        font-size: 16px !important; /* Prevent iOS zoom */
+        padding: 12px 14px;
+    }
+    
+    textarea {
+        min-height: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    input,
+    textarea,
+    select {
+        padding: 10px 12px;
+    }
+}
+
+/* ====================================
+   RESPONSIVE TABLES
+   ==================================== */
+
+@media (max-width: 768px) {
+    .specs-table {
+        font-size: 12px;
+    }
+    
+    .specs-table th,
+    .specs-table td {
+        padding: 8px 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Stack table on very small screens */
+    .specs-table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .specs-table th,
+    .specs-table td {
+        padding: 6px 8px;
+        font-size: 11px;
+    }
+}
+
+/* ====================================
+   RESPONSIVE MOTION (LEVEL 5 UPGRADE)
+   ==================================== */
+
+/* Desktop: hover-driven interactions */
+@media (hover: hover) and (pointer: fine) {
+    .product-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 40px rgba(19, 39, 63, 0.2);
+    }
+    
+    .btn:hover {
+        transform: translateY(-2px);
+    }
+    
+    .nav-link:hover {
+        transform: translateY(-1px);
+    }
+}
+
+/* Touch devices: subtle auto-motion */
+@media (hover: none) and (pointer: coarse) {
+    .product-card {
+        animation: float 8s ease-in-out infinite;
+    }
+    
+    .product-card:nth-child(2n) {
+        animation-delay: 1s;
+    }
+    
+    .product-card:nth-child(3n) {
+        animation-delay: 2s;
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-4px);
+    }
+}
+
+/* Gesture-based feedback for touch */
+@media (hover: none) {
+    .product-card:active {
+        transform: scale(0.98);
+        transition: transform 0.1s;
+    }
+    
+    button:active,
+    .btn:active {
+        transform: scale(0.96);
+        transition: transform 0.1s;
+    }
+}
+
+/* ====================================
+   LANDSCAPE MOBILE OPTIMIZATION
+   ==================================== */
+
+@media (max-height: 500px) and (orientation: landscape) {
+    .hero {
+        height: 300px;
+    }
+    
+    .chatbot-container {
+        max-height: 80vh;
+    }
+    
+    .nav {
+        max-height: 70vh;
+    }
+}
+
+/* ====================================
+   TABLET SPECIFIC (768px - 1024px)
+   ==================================== */
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .contact-content {
+        grid-template-columns: 1fr;
+        max-width: 600px;
+    }
+    
+    .product-intro {
+        grid-template-columns: 300px 1fr;
+        gap: 25px;
+    }
+}
+
+/* ====================================
+   SPLIT SCREEN & FOLDABLE SUPPORT (LEVEL 5)
+   ==================================== */
+
+/* Detect narrow viewports (split screen, side panels) */
+@media (max-width: 600px) and (min-height: 600px) {
+    .container {
+        padding: 0 10px;
+    }
+    
+    .product-item {
+        grid-template-columns: 1fr;
+    }
+    
+    .hero {
+        height: 400px;
+    }
+}
+
+/* Foldable devices (Galaxy Fold, etc.) */
+@media (max-width: 320px) {
+    html {
+        font-size: 12px;
+    }
+    
+    .hero {
+        height: 350px;
+    }
+    
+    .headline-main,
+    .headline-sub {
+        font-size: 22px !important;
+    }
+}
+
+/* Dual screen / wide foldables */
+@media (min-width: 1024px) and (max-width: 1366px) and (orientation: landscape) {
+    .container {
+        max-width: 95vw;
+    }
+    
+    .product-intro {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* ====================================
+   ULTRA-WIDE SCREEN OPTIMIZATION (1920px+)
+   ==================================== */
+
+@media (min-width: 1920px) {
+    .container {
+        max-width: min(85vw, 1800px);
+    }
+    
+    .products-grid {
+        max-width: 1800px;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+    
+    /* Increase information density on large screens */
+    .product-card .extra-info {
+        display: block;
+    }
+    
+    /* Better use of space */
+    .hero {
+        max-width: 2000px;
+        margin: 0 auto;
+    }
+}
+
+/* Ultra-wide monitors (2560px+) */
+@media (min-width: 2560px) {
+    .container {
+        max-width: 2200px;
+    }
+    
+    body {
+        font-size: 20px;
+    }
+    
+    .products-grid {
+        grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    }
+}
+
+/* ====================================
+   ULTRA-SMALL SCREENS (320px)
+   ==================================== */
+
+@media (max-width: 360px) {
+    html {
+        font-size: 13px;
+    }
+    
+    .container {
+        padding: 0 10px;
+    }
+    
+    .hero {
+        height: 380px;
+    }
+    
+    .headline-main,
+    .headline-sub {
+        font-size: 24px !important;
+    }
+    
+    .product-item {
+        padding: 15px;
+    }
+}
+
+/* ====================================
+   LARGE DESKTOP (1440px+)
+   ==================================== */
+
+@media (min-width: 1440px) {
+    .container {
+        max-width: 1400px;
+    }
+    
+    .products-grid {
+        max-width: 1400px;
+    }
+}
+
+/* ====================================
+   RESPONSIVE DENSITY (LEVEL 5)
+   ==================================== */
+
+/* Hide extra info on small screens */
+@media (max-width: 768px) {
+    .product-card .extra-info,
+    .hero-badge,
+    .scroll-indicator {
+        display: none;
+    }
+    
+    /* Progressive disclosure */
+    .product-description {
+        max-height: 100px;
+        overflow: hidden;
+    }
+}
+
+/* Show more info on medium screens */
+@media (min-width: 769px) and (max-width: 1199px) {
+    .product-card .extra-info {
+        display: none;
+    }
+}
+
+/* Full information density on large screens */
+@media (min-width: 1200px) {
+    .product-card .extra-info {
+        display: block;
+    }
+    
+    .product-card .extended-description {
+        display: block;
+    }
+}
+
+/* ====================================
+   ORIENTATION-BASED RESPONSIVENESS
+   ==================================== */
+
+/* Portrait orientation optimizations */
+@media (orientation: portrait) {
+    .hero {
+        height: clamp(400px, 60vh, 600px);
+    }
+    
+    .product-intro {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Landscape orientation optimizations */
+@media (orientation: landscape) and (max-height: 600px) {
+    .hero {
+        height: 85vh;
+        min-height: 400px;
+    }
+    
+    .chatbot-container {
+        max-height: 75vh;
+    }
+    
+    .nav {
+        max-height: 65vh;
+    }
+    
+    section {
+        padding: clamp(20px, 5vh, 40px) 0;
+    }
+}
+
+/* ====================================
+   ZOOM LEVEL HANDLING
+   ==================================== */
+
+/* Handle browser zoom 125% */
+@media (min-resolution: 120dpi) {
+    body {
+        font-size: 17px;
+    }
+    
+    .container {
+        padding: 0 clamp(10px, 2.5vw, 18px);
+    }
+}
+
+/* Handle browser zoom 150% */
+@media (min-resolution: 144dpi) {
+    body {
+        font-size: 16px;
+    }
+    
+    .product-item {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ====================================
+   PRINT STYLES
+   ==================================== */
+
+@media print {
+    .header,
+    .footer,
+    .chatbot-button,
+    .chatbot-container,
+    .whatsapp-btn,
+    .mobile-menu-btn {
+        display: none !important;
+    }
+    
+    body {
+        font-size: 12pt;
+        line-height: 1.5;
+    }
+    
+    .specs-page {
+        margin-top: 0;
+    }
+}
+
+/* ====================================
+   ACCESSIBILITY ENHANCEMENTS
+   ==================================== */
+
+/* Focus visible for keyboard navigation */
+*:focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    :root {
+        --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+        --shadow-md: 0 4px 15px rgba(0, 0, 0, 0.4);
+        --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.5);
+    }
+}
+
+/* ====================================
+   PERFORMANCE OPTIMIZATIONS
+   ==================================== */
+
+/* GPU acceleration for animations */
+@media (max-width: 768px) {
+    .product-card,
+    .nav,
+    .chatbot-container {
+        transform: translateZ(0);
+        will-change: transform;
+    }
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+
+/* ====================================
+   FIX FOR OVERLAY/SMUDGE ISSUES
+   ==================================== */
+
+/* Ensure no phantom overlays */
+body > *:not(#root) {
+    display: none !important;
+}
+
+/* Prevent accidental backdrop overlays */
+.lightbox:not(.active) {
+    display: none !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    visibility: hidden !important;
+}
+
+/* Ensure product cards don't have overlays */
+.product-card::before,
+.product-card::after {
+    display: none !important;
+}
+
+/* Clear any stuck modals */
+[role="dialog"]:not(.active) {
+    display: none !important;
+}
+
+/* Fix z-index stacking */
+.product-card {
+    position: relative;
+    z-index: 1;
+}
+
+.product-card:hover {
+    z-index: 2;
+}
+
+/* Ensure images are crisp */
+img {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+}

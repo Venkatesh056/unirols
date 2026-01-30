@@ -1,5 +1,6 @@
 /* ====================================
-   UNIROLS - Header Styles
+   UNIROLS - Header Styles (LEVEL 5)
+   Input-Aware + Adaptive Navigation
    ==================================== */
 
 .header {
@@ -17,30 +18,31 @@
 }
 
 .header-content {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: auto 1fr;
     align-items: center;
-    padding: 18px 30px;
+    padding: clamp(12px, 2.5vw, 18px) clamp(15px, 3vw, 30px);
     max-width: 1400px;
     margin: 0 auto;
+    column-gap: clamp(20px, 3vw, 30px);
 }
 
 /* Logo */
 .logo {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: clamp(8px, 1.5vw, 10px);
 }
 
 .logo-icon {
-    width: 55px;
-    height: 55px;
-    border: 2px solid var(--dusty-blue);
+    width: clamp(40px, 8vw, 55px);
+    height: clamp(40px, 8vw, 55px);
+    border: none;
     border-radius: var(--radius-md);
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(154, 168, 184, 0.15);
+    background: transparent;
     flex-shrink: 0;
     overflow: hidden;
 }
@@ -58,45 +60,81 @@
 }
 
 .logo-title {
-    font-size: 18px;
+    font-size: clamp(14px, 3vw, 23px);
     font-weight: 700;
-    color: var(--dusty-blue);
+    color: var(--white-pure);
     letter-spacing: 1.5px;
     line-height: 1;
+    font-family: 'Poppins', 'Inter', Arial, sans-serif;
 }
 
 .logo-subtitle {
-    font-size: 10px;
-    color: var(--dusty-blue);
+    font-size: clamp(9px, 2vw, 13px);
+    color: var(--white-off);
     letter-spacing: 2px;
     line-height: 1;
+    font-family: 'Poppins', 'Inter', Arial, sans-serif;
 }
 
-/* Navigation */
+/* Navigation - Input Aware */
 .nav {
     display: flex;
     align-items: center;
-    gap: 25px;
+    justify-content: flex-end;
+    gap: clamp(16px, 2vw, 28px);
 }
 
 .nav-list {
     display: flex;
-    gap: 25px;
+    align-items: center;
+    gap: clamp(18px, 2.5vw, 34px);
 }
 
 .nav-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     color: var(--text-light);
     font-weight: 400;
-    font-size: 16px;
+    font-size: clamp(16px, 2.5vw, 18px);
     padding: 8px 0;
     border-bottom: 2px solid transparent;
+    line-height: 1;
+    white-space: nowrap;
     transition: color var(--transition-medium), border-color var(--transition-medium);
 }
 
-.nav-link:hover,
-.nav-link.active {
-    color: var(--dusty-blue);
-    border-bottom-color: var(--dusty-blue);
+button.nav-link {
+    font-family: inherit;
+}
+
+/* Mouse: hover effects */
+@media (hover: hover) and (pointer: fine) {
+    .nav-link:hover,
+    .nav-link.active {
+        color: var(--dusty-blue);
+        border-bottom-color: var(--dusty-blue);
+    }
+}
+
+/* Touch: active state */
+@media (hover: none) and (pointer: coarse) {
+    .nav-link {
+        min-height: 44px;
+        padding: 12px 0;
+    }
+    
+    .nav-link:active,
+    .nav-link.active {
+        color: var(--dusty-blue);
+        border-bottom-color: var(--dusty-blue);
+    }
+}
+
+/* Keyboard: focus visible */
+.nav-link:focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
 }
 
 .nav-link i {
@@ -125,25 +163,51 @@
     z-index: var(--z-dropdown);
 }
 
-.dropdown:hover .dropdown-menu,
-.dropdown-menu.open {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
+/* Mouse: hover to open */
+@media (hover: hover) {
+    .dropdown:hover .dropdown-menu,
+    .dropdown-menu.open {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+}
+
+/* Touch: tap to open (handled by JS) */
+@media (hover: none) {
+    .dropdown-menu.open {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
 }
 
 .dropdown-item {
     display: block;
-    padding: 8px 20px;
+    padding: clamp(8px, 1.5vw, 10px) clamp(16px, 3vw, 20px);
     color: var(--text-light);
-    font-size: 14px;
+    font-size: clamp(14px, 2vw, 16px);
     font-weight: 400;
     transition: background var(--transition-fast), color var(--transition-fast);
+    min-height: 44px; /* Touch target */
+    display: flex;
+    align-items: center;
 }
 
-.dropdown-item:hover {
-    background: rgba(78, 0, 0, 0.3);
-    color: var(--mother-of-pearl);
+/* Mouse: hover effects */
+@media (hover: hover) {
+    .dropdown-item:hover {
+        background: rgba(78, 0, 0, 0.3);
+        color: var(--mother-of-pearl);
+    }
+}
+
+/* Touch: active state */
+@media (hover: none) {
+    .dropdown-item:active {
+        background: rgba(78, 0, 0, 0.4);
+        color: var(--mother-of-pearl);
+    }
 }
 
 .dropdown-header {
@@ -155,31 +219,63 @@
     padding-left: 40px !important;
 }
 
-/* WhatsApp Button */
+/* WhatsApp Button - Input Aware */
 .whatsapp-btn {
     color: var(--dusty-blue);
-    font-size: 40px;
+    font-size: clamp(32px, 6vw, 40px);
     line-height: 1;
     transition: all var(--transition-medium);
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.whatsapp-btn:hover {
-    color: var(--mother-of-pearl);
-    transform: scale(1.1);
+/* Mouse: hover effects */
+@media (hover: hover) {
+    .whatsapp-btn:hover {
+        color: var(--mother-of-pearl);
+        transform: scale(1.1);
+    }
+}
+
+/* Touch: tap feedback */
+@media (hover: none) {
+    .whatsapp-btn:active {
+        transform: scale(0.95);
+        color: var(--mother-of-pearl);
+    }
+}
+
+/* Keyboard: focus visible */
+.whatsapp-btn:focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
 }
 
 /* Mobile Menu Button */
 .mobile-menu-btn {
     display: none;
-    font-size: 24px;
+    font-size: clamp(20px, 4vw, 24px);
     color: var(--dusty-blue);
     padding: 8px;
     cursor: pointer;
     transition: color var(--transition-fast);
+    min-width: 44px;
+    min-height: 44px;
 }
 
-.mobile-menu-btn:hover {
-    color: var(--mother-of-pearl);
+@media (hover: hover) {
+    .mobile-menu-btn:hover {
+        color: var(--mother-of-pearl);
+    }
+}
+
+@media (hover: none) {
+    .mobile-menu-btn:active {
+        color: var(--mother-of-pearl);
+    }
 }
 
 /* Mobile Styles */

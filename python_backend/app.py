@@ -10,6 +10,10 @@ import os
 import uuid
 from datetime import datetime, timedelta
 from train_model import UnirolsNLPModel
+import smtplib
+import ssl
+from email.message import EmailMessage
+import re
 
 # Load environment variables
 load_dotenv()
@@ -23,11 +27,11 @@ CORS(app, resources={
 })
 
 # Load NLP model
-print("🚀 Loading NLP model...")
+print("Loading NLP model...")
 try:
     model = UnirolsNLPModel.load_model()
 except:
-    print("⚠️  No trained model found. Training new model...")
+    print("No trained model found. Training new model...")
     model = UnirolsNLPModel()
     model.save_model()
 
@@ -70,6 +74,90 @@ def health_check():
         'active_sessions': len(sessions),
         'timestamp': datetime.now().isoformat()
     })
+
+def send_contact_email(payload: dict):
+    """Send contact form email to configured recipients.
+
+    Environment variables used:
+    - SMTP_HOST, SMTP_PORT (default 587), SMTP_USER, SMTP_PASS
+    - SMTP_FROM (fallback to SMTP_USER)
+    - CONTACT_RECIPIENTS (comma-separated). Defaults to admin and sales.
+    """
+    smtp_host = os.getenv('SMTP_HOST')
+    smtp_port = int(os.getenv('SMTP_PORT', '587'))
+    smtp_user = os.getenv('SMTP_USER')
+    smtp_pass = os.getenv('SMTP_PASS')
+    smtp_from = os.getenv('SMTP_FROM') or smtp_user
+
+    # Default recipients per user request
+    default_recipients = ['admin@unirolsairtex.com', 'sales@unirolsairtex.com']
+    recipients_env = os.getenv('CONTACT_RECIPIENTS')
+    recipients = [r.strip() for r in recipients_env.split(',')] if recipients_env else default_recipients
+
+    if not smtp_host or not smtp_user or not smtp_pass or not smtp_from:
+        raise RuntimeError('SMTP configuration missing. Please set SMTP_HOST, SMTP_USER, SMTP_PASS, SMTP_FROM.')
+
+    name = payload.get('name', '').strip()
+    email = payload.get('email', '').strip()
+    phone = payload.get('phone', '').strip()
+    message_text = payload.get('message', '').strip()
+    products = payload.get('products', {}) or {}
+
+    selected_products = [k for k, v in products.items() if v]
+    products_list = ', '.join(selected_products) if selected_products else 'Not specified'
+
+    subject = f"New Contact Message from {name or 'Website Visitor'}"
+    body = (
+        f"A new contact inquiry was submitted on the website.\n\n"
+        f"Name: {name}\n"
+        f"Email: {email}\n"
+        f"Phone: {phone}\n"
+        f"Interested In: {products_list}\n\n"
+        f"Message:\n{message_text}\n\n"
+        f"Submitted At: {datetime.now().isoformat()}"
+    )
+
+    msg = EmailMessage()
+    msg['Subject'] = subject
+    msg['From'] = smtp_from
+    msg['To'] = ', '.join(recipients)
+    # Set Reply-To so recipients can reply directly to the sender
+    if email:
+        msg['Reply-To'] = email
+    msg.set_content(body)
+
+    context = ssl.create_default_context()
+    # Support both STARTTLS (587) and implicit TLS (465)
+    if smtp_port == 465:
+        with smtplib.SMTP_SSL(smtp_host, smtp_port, context=context, timeout=20) as server:
+            server.login(smtp_user, smtp_pass)
+            server.send_message(msg)
+    else:
+        with smtplib.SMTP(smtp_host, smtp_port, timeout=20) as server:
+            server.starttls(context=context)
+            server.login(smtp_user, smtp_pass)
+            server.send_message(msg)
+
+@app.route('/api/contact', methods=['POST'])
+def contact_submit():
+    """Receive contact form submissions and email to recipients."""
+    try:
+        data = request.get_json(force=True) or {}
+        required = ['name', 'email', 'message']
+        missing = [f for f in required if not str(data.get(f, '')).strip()]
+        if missing:
+            return jsonify({'error': f"Missing fields: {', '.join(missing)}"}), 400
+
+        # Basic email validation
+        email = str(data.get('email', '')).strip()
+        if not re.match(r"^[^@\s]+@[^@\s]+\.[^@\s]+$", email):
+            return jsonify({'error': 'Invalid email address'}), 400
+
+        send_contact_email(data)
+        return jsonify({'status': 'ok'})
+    except Exception as e:
+        print(f"Error sending contact email: {e}")
+        return jsonify({'error': 'Failed to send message'}), 500
 
 @app.route('/api/chat', methods=['POST'])
 def chat():
@@ -122,7 +210,7 @@ def chat():
         })
     
     except Exception as e:
-        print(f"❌ Error processing chat: {str(e)}")
+        print(f"Error processing chat: {str(e)}")
         return jsonify({
             'error': 'Internal server error',
             'message': 'Sorry, I encountered an error. Please try again.'
@@ -140,7 +228,7 @@ def retrain_model():
     
     try:
         global model
-        print("🔄 Retraining model...")
+        print("Retraining model...")
         model = UnirolsNLPModel()
         model.save_model()
         return jsonify({'message': 'Model retrained successfully'})
@@ -163,11 +251,11 @@ if __name__ == '__main__':
     debug = os.getenv('DEBUG', 'False').lower() == 'true'
     
     print("=" * 60)
-    print("🤖 UNIROLS NLP CHATBOT SERVER")
+    print("UNIROLS NLP CHATBOT SERVER")
     print("=" * 60)
-    print(f"📡 Server starting on http://localhost:{port}")
-    print(f"🧠 NLP Model: Loaded")
-    print(f"🔧 Debug Mode: {debug}")
+    print(f"Server starting on http://localhost:{port}")
+    print(f"NLP Model: Loaded")
+    print(f"Debug Mode: {debug}")
     print("=" * 60)
     
     app.run(host='0.0.0.0', port=port, debug=debug)

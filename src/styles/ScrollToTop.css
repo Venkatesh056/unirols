@@ -20,8 +20,8 @@
 }
 
 .scroll-top:hover {
-    background: var(--red-inferno);
-    color: #fff;
+    background: var(--navy-light);
+    color: var(--white-pure);
 }
 
 @media (max-width: 768px) {

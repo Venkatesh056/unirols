@@ -45,8 +45,8 @@
 }
 
 .slider-btn:hover {
-    background: var(--red-inferno);
-    color: #fff;
+    background: var(--navy-dark);
+    color: var(--white-pure);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
@@ -94,7 +94,7 @@
 }
 
 .slider-dots .dot.active {
-    background: var(--red-inferno);
+    background: var(--navy-dark);
 }
 
 /* Product Slider Variant */

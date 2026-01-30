@@ -1,26 +1,60 @@
 /* ====================================
    UNIROLS AIRTEX - CSS Variables
-   PANTONE Elegant Industrial Theme
+   Navy Blue & White Theme
    ==================================== */
 
 :root {
-    /* Primary Color Palette */
-    --mother-of-pearl: #E6DCD3;
-    --dusty-blue: #9AA8B8;
-    --mystic-navy: #13273F;
-    --red-inferno: #4E0000;
-    --chocolate-cremoso: #5C4033;
+    /* Primary Color Palette - Navy Blue & White */
+    --navy-dark: #13273F;
+    /* Primary navy blue */
+    --navy-medium: #1E3A5F;
+    /* Medium navy shade */
+    --navy-light: #2A4A7A;
+    /* Lighter navy for hover states */
+    --navy-pale: #3D5C8A;
+    /* Pale navy for subtle accents */
 
-    /* Semantic Colors */
-    --bg-light: #E6DCD3;
+    /* White Shades */
+    --white-pure: #FFFFFF;
+    /* Pure white */
+    --white-off: #F8FAFC;
+    /* Off-white for backgrounds */
+    --white-soft: #F1F5F9;
+    /* Soft white/light gray */
+    --white-muted: #E2E8F0;
+    /* Muted white for borders */
+
+    /* Legacy variable names mapped to new colors */
+    --mother-of-pearl: #F8FAFC;
+    /* Now off-white */
+    --dusty-blue: #4A6D8C;
+    /* Now navy-tint (blue with navy influence) */
+    --mystic-navy: #13273F;
+    /* Kept as primary navy */
+    --red-inferno: #1E3A5F;
+    /* Now medium navy (was red) */
+    --chocolate-cremoso: #2A4A7A;
+    /* Now light navy (was brown) */
+
+    /* Semantic Colors - Updated for navy/white theme */
+    --bg-light: #F8FAFC;
+    /* Off-white background */
     --bg-dark: #13273F;
-    --bg-white: #ffffff;
+    /* Navy background */
+    --bg-white: #FFFFFF;
+    /* Pure white */
     --text-dark: #13273F;
-    --text-light: #E6DCD3;
-    --text-muted: #6B5E54;
-    --border-light: #D4C8BC;
-    --accent-primary: #4E0000;
-    --accent-secondary: #5C4033;
+    /* Navy text */
+    --text-light: #F8FAFC;
+    /* Off-white text on dark */
+    --text-muted: #4A6D8C;
+    /* Muted navy-blue for secondary text */
+    --border-light: #E2E8F0;
+    /* Light border color */
+    --accent-primary: #1E3A5F;
+    /* Medium navy for accents */
+    --accent-secondary: #2A4A7A;
+    /* Light navy for secondary accents */
 
     /* Transitions */
     --transition-fast: 0.2s ease;
@@ -59,7 +93,7 @@
     --z-tooltip: 1100;
 
     /* Container */
-    --container-max: 1200px;
+    --container-max: 1400px;
     --header-height: 80px;
 }
 
@@ -82,7 +116,7 @@ body {
     line-height: 1.6;
     color: var(--text-dark);
     background-color: var(--bg-light);
-    font-size: 16px;
+    font-size: 18px;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -141,7 +175,7 @@ button {
     display: block;
     width: 60px;
     height: 3px;
-    background: var(--red-inferno);
+    background: var(--navy-medium);
     margin: 15px auto 0;
     border-radius: 2px;
 }
@@ -157,6 +191,20 @@ button {
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border: 0;
+}
+
+.floating-card {
+    background: var(--bg-white);
+    border: 1px solid var(--white-muted);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    padding: 28px;
+}
+
+@media (max-width: 768px) {
+    .floating-card {
+        padding: 20px;
+    }
 }
 
 /* Mobile-first breakpoints */

@@ -2,6 +2,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
+import ScrollRestoration from './components/ScrollRestoration';
+import ScrollProgressBar from './components/ScrollProgressBar';
 import ChatbotWidget from './components/ChatbotWidget';
 import HomePage from './pages/HomePage';
 import ProductPage from './pages/ProductPage';
@@ -16,6 +18,8 @@ import './styles/Products.css';
 function App() {
   return (
     <Router>
+      <ScrollRestoration />
+      <ScrollProgressBar />
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
